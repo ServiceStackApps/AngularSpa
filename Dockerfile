@@ -12,10 +12,10 @@ RUN npm install -g @angular/cli@9.1.15
 COPY . .
 RUN dotnet restore
 
-WORKDIR /source/MyApp
+WORKDIR /source/AngularSpaTemplate
 RUN dotnet publish -c release -o /app --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "MyApp.dll"]
+ENTRYPOINT ["dotnet", "AngularSpaTemplate.dll"]
