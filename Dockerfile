@@ -7,7 +7,10 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
  && echo "npm version: $(npm --version)" \
  && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g @angular/cli@9.1.15
+COPY AngularSpaTemplate/package.json .
+COPY AngularSpaTemplate/npm-shrinkwrap.json .
+
+RUN npm --prefix AngularSpaTemplate install
 
 COPY . .
 RUN dotnet restore
