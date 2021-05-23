@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /source
+WORKDIR /app
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
  && apt-get install -y --no-install-recommends nodejs \
@@ -7,18 +7,18 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
  && echo "npm version: $(npm --version)" \
  && rm -rf /var/lib/apt/lists/*
 
-COPY AngularSpaTemplate/package.json .
-COPY AngularSpaTemplate/npm-shrinkwrap.json .
+COPY AngularSpa/package.json .
+COPY AngularSpa/npm-shrinkwrap.json .
 
-RUN npm --prefix AngularSpaTemplate install
+RUN npm --prefix AngularSpa install
 
 COPY . .
 RUN dotnet restore
 
-WORKDIR /source/AngularSpaTemplate
+WORKDIR /app/AngularSpa
 RUN dotnet publish -c release -o /app --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "AngularSpaTemplate.dll"]
+ENTRYPOINT ["dotnet", "AngularSpa.dll"]

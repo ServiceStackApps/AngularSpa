@@ -1,6 +1,6 @@
 # angular-spa
 
-.NET 5.0 Angular 9 project generated with [Angular CLI](https://github.com/angular/angular-spa).
+.NET 5.0 Angular 12 project generated with [Angular CLI](https://github.com/angular/angular-spa).
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/angular-spa.png)](http://angular-spa.web-templates.io/)
 
@@ -9,6 +9,12 @@
     $ dotnet tool install -g x
 
     $ x new angular-spa ProjectName
+
+Alternatively write new project files directly into an empty repository, using the Directory Name as the ProjectName:
+
+    $ git clone https://github.com/<User>/<ProjectName>.git
+    $ cd <ProjectName>
+    $ x new angular-spa
 
 ## Development workflow
 
